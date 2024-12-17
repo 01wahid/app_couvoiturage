@@ -10846,3 +10846,33 @@ html {
   background-repeat: no-repeat;
   min-height: 15rem;
 }
+
+#contact {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+#contact .text-primary {
+  color: #007bff !important;
+}
+
+#contact .social-icons a {
+  margin: 0 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#contact .social-icons a:hover {
+  transform: scale(1.2);
+  color: #0056b3;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}

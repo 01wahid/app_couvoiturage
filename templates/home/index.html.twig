@@ -13,10 +13,12 @@
           <div class="my-5 text-center text-xl-start">
             <h1 class="display-5 fw-bolder text-white mb-2">Votre solution idéale pour le covoiturage</h1>
             <p class="lead fw-normal text-white-50 mb-4">Simplifiez vos trajets, économisez du temps et partagez vos voyages avec notre application conviviale et sécurisée !</p>
+            {% if app.user is null %}
             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
               <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{{ path('app_login') }}">LOGIN</a>
               <a class="btn btn-outline-light btn-lg px-4" href="{{ path('app_register') }}">SIGN UP</a>
             </div>
+            {% endif %}
           </div>
         </div>
         <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="{{ asset('images/image_hero.svg') }}" width="400" height="400" alt="..." /></div>
@@ -27,7 +29,7 @@
 
         <!-- Start Why Choose Us Section -->
 
-  <section class="py-5" id="features">
+  <section class="py-5" id="about-us">
     <div class="container px-5 my-5">
       <div class="row gx-5">
         <div class="col-lg-4 mb-5 mb-lg-0">
@@ -61,8 +63,63 @@
     </div>
   </section>
 
-  <!-- Témoignage -->
-  <div class="py-5 bg-light">
+        <!-- End Why Choose Us Section -->
+
+        <!--  Start Contact Section -->
+
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Contactez-nous</h2>
+      <div class="row">
+        <!-- Adresse -->
+        <div class="col-md-4 text-center">
+          <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
+          <h5>Adresse</h5>
+          <p>123 Rue Principale, Tunis, Tunisie</p>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="col-md-4 text-center">
+          <i class="fas fa-phone-alt fa-3x mb-3 text-primary"></i>
+          <h5>Téléphone</h5>
+          <p><a href="tel:+21699742820" class="text-decoration-none">+216 12 345 678</a></p>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-4 text-center">
+          <i class="fas fa-envelope fa-3x mb-3 text-primary"></i>
+          <h5>Email</h5>
+          <p><a href="mailto:contact@covoiturage.com" class="text-decoration-none">contact@covoiturage.com</a></p>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <!-- Réseaux sociaux -->
+        <div class="col-12 text-center">
+          <h5>Suivez-nous</h5>
+          <div class="social-icons mt-3">
+            <a href="https://facebook.com" target="_blank" class="text-primary mx-2">
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="text-info mx-2">
+              <i class="fab fa-twitter fa-2x"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="text-danger mx-2">
+              <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="text-primary mx-2">
+              <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+        <!-- End Contact Section -->
+
+        <!-- Témoignage -->
+  <div class="py-5" style="background-color: #C7C8CC">
     <div class="container px-5 my-5">
       <div class="row gx-5 justify-content-center">
         <div class="col-lg-10 col-xl-7">
@@ -85,6 +142,8 @@
   </div>
 
 
-  <!-- End Why Choose Us Section -->
+
+
+
 
 {% endblock %}
