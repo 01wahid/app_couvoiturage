@@ -53,6 +53,14 @@
                             {% endif %}
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row">Date de création</th>
+                        <td>{{ reclamation.date ? reclamation.date|date('d/m/Y H:i') : 'Non définie' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Utilisateur</th>
+                        <td>{{ reclamation.user ? reclamation.user.nom ~ ' ' ~ reclamation.user.prenom : 'Utilisateur inconnu' }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -60,9 +68,11 @@
                 <a href="{{ path('app_reclamation_list') }}" class="btn btn-secondary me-2">
                     <i class="bi bi-arrow-left"></i> Retour à la liste
                 </a>
-                <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-primary">
-                    <i class="bi bi-pencil"></i> Modifier
-                </a>
+                {% if is_granted('ROLE_ADMIN') or reclamation.user.id == app.user.id %}
+                    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Modifier
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

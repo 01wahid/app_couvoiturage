@@ -1,83 +1,53 @@
-{#{% extends 'base.html.twig' %}#}
-
-{#{% block title %}Nouvelle Réclamation{% endblock %}#}
-
-{#{% block body %}#}
-{#    <div class="container mt-5 h-100">#}
-{#        <h1 class="mb-4 text-center">Déposer une Nouvelle Réclamation</h1>#}
-
-{#        {{ form_start(form) }}#}
-
-{#        <div class="mb-3">#}
-{#            {{ form_label(form.titre, 'Titre de la réclamation', { 'label_attr': { 'class': 'form-label' } }) }}#}
-{#            {{ form_widget(form.titre, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez un titre' } }) }}#}
-{#            {{ form_errors(form.titre) }}#}
-{#        </div>#}
-
-{#        <div class="mb-3">#}
-{#            {{ form_label(form.categorie, 'Type de reclamation', { 'label_attr': { 'class': 'form-label' } }) }}#}
-{#            {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control' } }) }}#}
-{#            {{ form_errors(form.categorie) }}#}
-{#        </div>#}
-
-{#        <div class="mb-3">#}
-{#            {{ form_label(form.priorite, 'Niveau de priorite', { 'label_attr': { 'class': 'form-label' } }) }}#}
-{#            {{ form_widget(form.priorite, { 'attr': { 'class': 'form-control' } }) }}#}
-{#            {{ form_errors(form.priorite) }}#}
-{#        </div>#}
-
-{#        <div class="mb-3">#}
-{#            {{ form_label(form.description, 'Description détaillée', { 'label_attr': { 'class': 'form-label' } }) }}#}
-{#            {{ form_widget(form.description, { 'attr': { 'class': 'form-control', 'placeholder': 'Décrivez votre problème...' } }) }}#}
-{#            {{ form_errors(form.description) }}#}
-{#        </div>#}
-
-{#        <button type="submit" class="btn btn-primary w-100">Envoyer la Réclamation</button>#}
-{#        <a href="{{ path('app_reclamation_list') }}" class="btn btn-primary w-100 mt-2">Annuler</a>#}
-
-{#        {{ form_end(form) }}#}
-{#    </div>#}
-
-{#{% endblock %}#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Ajouter une Réclamation{% endblock %}
 
 {% block body %}
     <div class="container mt-4 h-100">
+        <!-- Card contenant le formulaire -->
         <div class="card shadow-sm">
             <div class="card-header bg-success text-white">
                 <h2>Ajouter une Nouvelle Réclamation</h2>
             </div>
             <div class="card-body">
+                <!-- Début du formulaire -->
                 {{ form_start(form) }}
+
+                <!-- Section Titre -->
                 <div class="row">
                     <div class="col-md-10 mb-3">
                         <label for="titre" class="form-label"><strong>Titre de la Réclamation</strong></label>
                         {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Exemple : Problème de réservation'}}) }}
-                        <div class="form-text">Veuillez fournir un titre clair et concis.</div>
-                    </div>
-
-                    <div class="col-md-10 mb-3">
-                        <label for="categorie" class="form-label"><strong>Catégorie</strong></label>
-                        {{ form_widget(form.categorie, {'attr': {'class': 'form-select'}}) }}
+                        <div class="form-text">Veuillez fournir un titre clair et concis pour mieux identifier la réclamation.</div>
                     </div>
                 </div>
 
+                <!-- Section Catégorie -->
+                <div class="row">
+                    <div class="col-md-10 mb-3">
+                        <label for="categorie" class="form-label"><strong>Catégorie</strong></label>
+                        {{ form_widget(form.categorie, {'attr': {'class': 'form-select'}}) }}
+                        <div class="form-text">Sélectionnez la catégorie qui correspond le mieux à votre problème.</div>
+                    </div>
+                </div>
+
+                <!-- Section Priorité -->
                 <div class="row">
                     <div class="col-md-10 mb-3">
                         <label for="priorite" class="form-label"><strong>Priorité</strong></label>
                         {{ form_widget(form.priorite, {'attr': {'class': 'form-select'}}) }}
-                        <div class="form-text">Choisissez la priorité selon l'urgence du problème.</div>
+                        <div class="form-text">Choisissez la priorité selon l'urgence de votre problème. Une priorité élevée sera traitée plus rapidement.</div>
                     </div>
-
                 </div>
 
+                <!-- Section Description -->
                 <div class="mb-3">
                     <label for="description" class="form-label"><strong>Description</strong></label>
                     {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': '5', 'placeholder': 'Décrivez votre problème en détail...'}}) }}
+                    <div class="form-text">Donnez tous les détails nécessaires pour que l'équipe puisse comprendre et résoudre votre problème rapidement.</div>
                 </div>
 
+                <!-- Boutons de soumission et annulation -->
                 <div class="text-end">
                     <button type="submit" class="btn btn-success me-2">
                         <i class="bi bi-check-circle"></i> Soumettre
@@ -86,6 +56,8 @@
                         <i class="bi bi-arrow-left"></i> Annuler
                     </a>
                 </div>
+
+                <!-- Fin du formulaire -->
                 {{ form_end(form) }}
             </div>
         </div>

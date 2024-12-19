@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ReponseCrudController extends AbstractCrudController
 {
@@ -21,54 +20,38 @@ class ReponseCrudController extends AbstractCrudController
         return Reponse::class;
     }
 
-    // Configuration des champs qui seront affichés dans EasyAdmin
-    // Configuration des champs qui seront affichés dans EasyAdmin
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id', 'ID')->hideOnForm(),  // Masquer l'ID dans le formulaire
-            TextEditorField::new('texte', 'Texte'),  // Champ de texte pour le contenu de la réponse
-            DateTimeField::new('dateReponse', 'Date de Réponse')
-                ->setFormat('short'),  // Affichage de la date au format court
-            BooleanField::new('lue', 'Lue'),  // Champ booléen pour savoir si la réponse est lue
-            AssociationField::new('reclamation', 'Réclamation')  // Association avec l'entité Reclamation
-            ->setFormTypeOptions(['choice_label' => 'titre']),  // Utilisation du titre de la réclamation dans la sélection
+        // Définir les champs de base
+        $fields = [
+            IdField::new('id', 'ID')->hideOnForm(),
+            DateTimeField::new('dateReponse', 'Date de Réponse')->setFormat('short'),
+            BooleanField::new('lue', 'Lue'),
+            AssociationField::new('reclamation', 'Réclamation')->setFormTypeOptions(['choice_label' => 'titre']),
+            TextEditorField::new('texte', 'Réponse de l\'administrateur')->onlyOnIndex(),  // Affiche dans la liste
         ];
+
+        // Si on est sur la page "Détail", ajouter le champ des détails
+        if (Crud::PAGE_DETAIL === $pageName) {
+            return array_merge($fields, [
+                TextEditorField::new('texte', 'Réponse complète de l\'administrateur')->onlyOnDetail(),
+                TextEditorField::new('details', 'Réponse de l\'utilisateur')->onlyOnDetail(),  // Affiche la réponse de l'utilisateur dans les détails
+            ]);
+        }
+
+        return $fields;
     }
 
-    // Configuration des actions disponibles (édition, suppression, etc.)
     public function configureActions(Actions $actions): Actions
     {
-        // Personnalisation de l'action "saveAndReturn" dans la page d'édition
+        // Personnalisation des actions
         $actions = $actions
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action
-                    ->setLabel('Sauvegarder et Retourner')  // Personnalisation du texte du bouton
-                    ->setIcon('fa fa-check');  // Icône personnalisée pour l'action
-            });
-
-        // Personnalisation de l'action "saveAndContinue" dans la page d'édition
-        $actions = $actions
-            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
-                return $action->setLabel('Sauvegarder et Continuer');  // Personnalisation de l'action
+                    ->setLabel('Sauvegarder et Retourner')
+                    ->setIcon('fa fa-check');
             });
 
         return $actions;
     }
-
-
-
-
-
-
-    /*
-    public function configureFields(string $pageName): iterable
-    {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
-    }
-    */
 }

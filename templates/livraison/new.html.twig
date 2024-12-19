@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une nouvelle livraison{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 h-100">
+        <h1 class="text-center mb-4">Créer une nouvelle Livraison</h1>
+
+        {# Affichage des erreurs de validation si présentes #}
+        {% if form.vars.errors|length > 0 %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in form.vars.errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {# Formulaire de création d'une nouvelle livraison #}
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Détails de la livraison</h4>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+
+                <div class="form-group">
+                    {{ form_label(form.expediteur) }}
+                    {{ form_widget(form.expediteur, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'expéditeur'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.destinataire) }}
+                    {{ form_widget(form.destinataire, {'attr': {'class': 'form-control', 'placeholder': 'Nom du destinataire'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.adresseDepart) }}
+                    {{ form_widget(form.adresseDepart, {'attr': {'class': 'form-control', 'placeholder': 'Adresse de départ'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.adresseArrivee) }}
+                    {{ form_widget(form.adresseArrivee, {'attr': {'class': 'form-control', 'placeholder': 'Adresse d\'arrivée'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.dateLivraison) }}
+                    {{ form_widget(form.dateLivraison, {'attr': {'class': 'form-control', 'placeholder': 'Date et heure de livraison'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.etat) }}
+                    {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Créer Livraison</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {# Lien pour retourner à la liste des livraisons #}
+        <div class="text-center mt-3">
+            <a href="{{ path('app_livraison_index') }}" class="btn btn-secondary">Retour à la liste des livraisons</a>
+        </div>
+    </div>
+{% endblock %}

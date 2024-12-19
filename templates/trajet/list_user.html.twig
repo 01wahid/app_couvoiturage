@@ -1,0 +1,58 @@
+{# templates/trajet/list_user.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes trajets{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 h-75">
+        <h1 class="text-center mb-4">Mes trajets</h1>
+
+        {# Section de la liste des trajets #}
+        <div class="trajets-list">
+            {% if trajets is defined and trajets is not empty %}
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Départ</th>
+                        <th>Destination</th>
+                        <th>Date et heure</th>
+                        <th>Nombre de places</th>
+                        <th>Contribution aux frais (DT)</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for trajet in trajets %}
+                        <tr>
+                            <td>{{ trajet.depart }}</td>
+                            <td>{{ trajet.destination }}</td>
+                            <td>{{ trajet.dateHeure ? trajet.dateHeure|date('d/m/Y H:i') : 'Non spécifiée' }}</td>
+                            <td>{{ trajet.nombrePlaces }}</td>
+                            <td>{{ trajet.contributionFrais }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ path('edit_trajet', {'id': trajet.idTrajet}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                                    <form action="{{ path('delete_trajet', {'id': trajet.idTrajet}) }}" method="post" style="display:inline-block;">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trajet.idTrajet) }}">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?');">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info text-center">
+                    Vous n'avez actuellement aucun trajet enregistré. Cliquez sur le bouton ci-dessous pour en ajouter un.
+                </div>
+            {% endif %}
+        </div>
+
+        {# Bouton pour ajouter un trajet #}
+        <div class="text-center mt-4">
+            <a href="{{ path('new_trajet') }}" class="btn btn-primary btn-lg">Ajouter un nouveau trajet</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,26 +1,25 @@
-{% extends '@EasyAdmin/page/content.html.twig' %}
-{% block title %}Nouvelle Réponse{% endblock %}
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ajouter une nouvelle réponse{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="mb-4">Répondre à la Réclamation : "{{ reclamation.titre }}"</h1>
+    <div class="container mt-4 h-100">
+        <h1>Ajouter une nouvelle réponse</h1>
 
+        {# Formulaire de création de la réponse #}
         {{ form_start(form) }}
+        {{ form_row(form.texte) }} {# Champ pour la réponse de l'administrateur #}
+        {{ form_row(form.details) }} {# Champ pour les détails supplémentaires #}
 
-        <div class="form-group mb-4">
-            {{ form_label(form.texte, 'Message de Réponse') }}
-            {{ form_widget(form.texte, { 'attr': { 'class': 'form-control', 'rows': 6 } }) }}
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <a href="{{ path('admin') }}" class="btn btn-secondary">
-                <i class="fa fa-arrow-left"></i> Retour
-            </a>
-{#            <button type="submit" class="btn btn-success">#}
-{#                <i class="fa fa-send"></i> Envoyer la Réponse#}
-{#            </button>#}
-        </div>
-
+        <a href="{{ path('dash_reclamation') }}" type="submit" class="btn btn-success my-3">Ajouter</a>
         {{ form_end(form) }}
+
+        {# Lien pour revenir à la liste des réponses #}
+        <a href="{{ path('dash_reclamation') }}" class="btn btn-primary mt-3">Retour à la liste</a>
+
+        {# Si vous souhaitez inclure un formulaire de suppression pour cette réponse (dans un autre contexte, comme après création), vous pouvez le faire ici #}
+        {% if reponse is defined %}
+            {{ include('reponse/_delete_form.html.twig', {'reponse': reponse}) }}
+        {% endif %}
     </div>
 {% endblock %}

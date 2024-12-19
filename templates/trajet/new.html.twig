@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouveau trajet{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-success text-white">
+                <h2 class="text-center">Créer un nouveau trajet</h2>
+            </div>
+            <div class="card-body">
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="depart" class="form-label"><strong>Départ</strong></label>
+                        {{ form_widget(form.depart, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le lieu de départ'}}) }}
+                        {{ form_errors(form.depart) }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="destination" class="form-label"><strong>Destination</strong></label>
+                        {{ form_widget(form.destination, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le lieu de destination'}}) }}
+                        {{ form_errors(form.destination) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="dateHeure" class="form-label"><strong>Date et Heure</strong></label>
+                        {{ form_widget(form.dateHeure, {'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez la date et l\'heure'}}) }}
+                        {{ form_errors(form.dateHeure) }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="nombrePlaces" class="form-label"><strong>Nombre de places</strong></label>
+                        {{ form_widget(form.nombrePlaces, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nombre de places disponibles'}}) }}
+                        {{ form_errors(form.nombrePlaces) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="contributionFrais" class="form-label"><strong>Prix (DT)</strong></label>
+                        {{ form_widget(form.contributionFrais, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la contribution aux frais'}}) }}
+                        {{ form_errors(form.contributionFrais) }}
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg">Créer</button>
+                    <a href="{{ path('list_trajets_user') }}" class="btn btn-secondary btn-lg">Annuler</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

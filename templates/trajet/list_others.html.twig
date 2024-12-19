@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trajets des autres utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Trajets disponibles</h1>
+
+        {% if trajets is defined and trajets is not empty %}
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Conducteur</th>
+                    <th scope="col">Départ</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Date et heure</th>
+                    <th scope="col">Nombre de places</th>
+                    <th scope="col">Contribution (€)</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for trajet in trajets %}
+                    <tr>
+                        <td>{{ trajet.nomConducteur|default('Non spécifié') }}</td>
+                        <td>{{ trajet.depart }}</td>
+                        <td>{{ trajet.destination }}</td>
+                        <td>{{ trajet.dateHeure ? trajet.dateHeure|date('d/m/Y H:i') : 'Non spécifiée' }}</td>
+                        <td>{{ trajet.nombrePlaces }}</td>
+                        <td>{{ trajet.contributionFrais }}</td>
+                        <td>
+                            <a href="{{ path('new_reservation', {'idTrajet': trajet.idTrajet}) }}" class="btn btn-success btn-sm">
+                                Réserver
+                            </a>
+                            {# Afficher le bouton "Livraison" seulement si la livraison n'a pas encore été demandée #}
+{#                            {% if livraison is null %}#}
+{#                                <a href="{{ path('livraison_new', { 'idTrajet': trajet.id }) }}" class="btn btn-success btn-sm">#}
+{#                                    Demander une Livraison#}
+{#                                </a>#}
+{#                            {% else %}#}
+{#                                <span class="text-muted">Livraison demandée</span>#}
+{#                            {% endif %}#}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info text-center">
+                <p>Aucun trajet disponible pour le moment. Revenez plus tard ou contactez d'autres utilisateurs pour organiser un trajet.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

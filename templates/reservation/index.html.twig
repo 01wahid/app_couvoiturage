@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!{% endblock %}
+
+{% block body %}
+    <h1>Liste des réservations</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom Passager</th>
+                <th>Trajet</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.nomPassager }}</td>
+                    <td>{{ reservation.trajet.nom }}</td>
+                    <td>{{ reservation.statut.getLabel() }}</td> {# Utilisation de la méthode getLabel() #}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

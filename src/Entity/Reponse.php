@@ -30,6 +30,10 @@ class Reponse
     private ?\DateTimeInterface $dateReponse = null;
 
 //------------------------------------------------------------------------
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $details = null;
+
+//------------------------------------------------------------------------
     #[ORM\ManyToOne(targetEntity:"App\Entity\Reclamation", inversedBy: 'reponses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Reclamation $reclamation;
@@ -101,6 +105,18 @@ class Reponse
         return $this;
     }
 
+//------------------------------------------------------------------------
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): self
+    {
+        $this->details = $details;
+        return $this;
+    }
 
     //------------------------------------------------------------------------
 

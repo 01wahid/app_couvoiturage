@@ -47,7 +47,7 @@ class Reclamation
     public function __construct()
     {
         // Initialisation de la collection de réponses
-        $this->responses = new ArrayCollection();
+        $this->reponses = new ArrayCollection();
     }
     // Getters and setters
 

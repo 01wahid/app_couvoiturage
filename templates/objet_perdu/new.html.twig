@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ObjetPerdu{% endblock %}
+
+{% block body %}
+    <h1>Create new ObjetPerdu</h1>
+
+    {{ include('objet_perdu/_form.html.twig') }}
+
+    <a href="{{ path('app_objet_perdu_index') }}">back to list</a>
+{% endblock %}

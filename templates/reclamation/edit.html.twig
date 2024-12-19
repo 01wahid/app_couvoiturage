@@ -4,37 +4,44 @@
 
 {% block body %}
     <div class="container mt-5 h-100">
+        <!-- Card contenant le formulaire de modification de réclamation -->
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
                 <h1 class="h4">Modifier la Réclamation</h1>
             </div>
             <div class="card-body">
+                <!-- Début du formulaire -->
                 {{ form_start(form) }}
 
+                <!-- Section Titre -->
                 <div class="form-group mb-4">
                     {{ form_label(form.titre, 'Titre de la Réclamation', { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
                     {{ form_widget(form.titre, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez un titre' } }) }}
                     {{ form_errors(form.titre) }}
                 </div>
 
+                <!-- Section Catégorie -->
                 <div class="form-group mb-4">
                     {{ form_label(form.categorie, 'Type de Réclamation', { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
                     {{ form_widget(form.categorie, { 'attr': { 'class': 'form-control' } }) }}
                     {{ form_errors(form.categorie) }}
                 </div>
 
+                <!-- Section Priorité -->
                 <div class="form-group mb-4">
                     {{ form_label(form.priorite, 'Niveau de Priorité', { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
                     {{ form_widget(form.priorite, { 'attr': { 'class': 'form-select' } }) }}
                     {{ form_errors(form.priorite) }}
                 </div>
 
+                <!-- Section Description -->
                 <div class="form-group mb-4">
                     {{ form_label(form.description, 'Description Détaillée', { 'label_attr': { 'class': 'form-label fw-bold' } }) }}
                     {{ form_widget(form.description, { 'attr': { 'class': 'form-control', 'placeholder': 'Décrivez votre problème...' } }) }}
                     {{ form_errors(form.description) }}
                 </div>
 
+                <!-- Boutons de soumission et annulation -->
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">
                         <i class="bi bi-save"></i> Enregistrer les Modifications
@@ -44,6 +51,7 @@
                     </a>
                 </div>
 
+                <!-- Fin du formulaire -->
                 {{ form_end(form) }}
             </div>
         </div>

@@ -46,9 +46,9 @@
                     <td>{{ reclamation.description }}</td>
                     <td>{{ reclamation.date ? reclamation.date|date('d/m/Y') : 'N/A' }}</td>
                     <td>
-                            <span class="badge {% if reclamation.priorite == 'Urgent' %}bg-danger{% elseif reclamation.priorite == 'Moyen' %}bg-warning text-dark{% else %}bg-success{% endif %}">
-                                {{ reclamation.priorite }}
-                            </span>
+                        <span class="badge {% if reclamation.priorite == 'Urgent' %}bg-danger{% elseif reclamation.priorite == 'Moyen' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+                            {{ reclamation.priorite }}
+                        </span>
                     </td>
                     <td>
                         <span class="badge bg-info text-dark">{{ reclamation.categorie }}</span>
@@ -74,7 +74,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7" class="text-center text-muted">Aucune réclamation trouvée.</td>
+                    <td colspan="8" class="text-center text-muted">Aucune réclamation trouvée.</td>
                 </tr>
             {% endfor %}
             </tbody>

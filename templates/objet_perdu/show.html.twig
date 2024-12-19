@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ObjetPerdu{% endblock %}
+
+{% block body %}
+    <h1>ObjetPerdu</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ objet_perdu.id }}</td>
+            </tr>
+            <tr>
+                <th>Objet</th>
+                <td>{{ objet_perdu.objet }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ objet_perdu.description }}</td>
+            </tr>
+            <tr>
+                <th>IsFound</th>
+                <td>{{ objet_perdu.isFound ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DatePerte</th>
+                <td>{{ objet_perdu.datePerte ? objet_perdu.datePerte|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_objet_perdu_index') }}">back to list</a>
+
+    <a href="{{ path('app_objet_perdu_edit', {'id': objet_perdu.id}) }}">edit</a>
+
+    {{ include('objet_perdu/_delete_form.html.twig') }}
+{% endblock %}

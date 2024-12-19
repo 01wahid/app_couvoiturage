@@ -20,13 +20,10 @@
 		<link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 		<!-- Ajouter Chart.js via CDN -->
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
 		{% block stylesheets %}
         {% endblock %}
 
@@ -91,6 +88,47 @@
 								</li>
 							{% endif %}
 
+
+
+
+							<li class="nav-item dropdown">
+								<a
+										class="nav-link dropdown-toggle"
+										id="navbarDropdownTrajet"
+										href="#"
+										role="button"
+										data-bs-toggle="dropdown"
+										aria-expanded="false"
+								>
+									Trajet
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdownTrajet">
+									<li><a class="dropdown-item" href="{{ path('list_trajets_others') }}">Trajet</a></li>
+									<li><a class="dropdown-item" href="{{ path('list_trajets_user') }}">Trajet personnel</a></li>
+								</ul>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a
+										class="nav-link dropdown-toggle"
+										id="navbarDropdownTrajet"
+										href="#"
+										role="button"
+										data-bs-toggle="dropdown"
+										aria-expanded="false"
+								>
+									Reservations
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdownTrajet">
+									<li><a class="dropdown-item" href="{{ path('reservations_on_my_trips') }}">Reservation</a></li>
+									<li><a class="dropdown-item" href="{{ path('my_reservations') }}">Reservation personnel</a></li>
+								</ul>
+							</li>
+
+							<li class="nav-item">
+									<a class="nav-link" href="{{ path('app_objet_perdu_index') }}">Objet</a>
+								</li>
+
 								<li class="nav-item">
 									<a class="nav-link" href="{{ path('app_reclamation_list') }}">Réclamation</a>
 								</li>
@@ -151,6 +189,8 @@
 
 		<!-- Bootstrap core JS-->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 		<!-- Core theme JS-->
 		<script src="{{ asset('js/scripts.js') }}"></script>

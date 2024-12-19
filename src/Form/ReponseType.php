@@ -18,36 +18,19 @@ class ReponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Le texte de la réponse
             ->add('texte', TextareaType::class, [
-                'label' => 'Texte de la réponse',
+                'label' => 'Réponse de l\'administrateur',
                 'attr' => ['class' => 'form-control', 'rows' => 5, 'placeholder' => 'Entrez votre réponse...']
             ])
-            // La date de réponse (par défaut, on la met à la date actuelle)
-            ->add('dateReponse', DateTimeType::class, [
-                'label' => 'Date de la réponse',
-                'widget' => 'single_text',
-                'attr' => ['class' => 'form-control'],
-                'data' => new \DateTime() // date actuelle par défaut
-            ])
-            // Le statut "lue"
-            ->add('lue', CheckboxType::class, [
-                'label' => 'Réponse lue',
+            ->add('details', TextareaType::class, [
+                'label' => 'Détails supplémentaires (si nécessaire)',
                 'required' => false,
-                'attr' => ['class' => 'form-check-input']
+                'attr' => ['class' => 'form-control', 'rows' => 5, 'placeholder' => 'Ajoutez des détails supplémentaires ici...']
             ])
-            // Association à une réclamation (sélectionner une réclamation existante)
-            ->add('reclamation', null, [
-                'label' => 'Réclamation associée',
-                'class' => Reclamation::class,
-                'choice_label' => 'titre', // Choisir quel champ afficher pour la réclamation
-                'attr' => ['class' => 'form-control']
-            ])
-            // Bouton de soumission
-            ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer la réponse',
-                'attr' => ['class' => 'btn btn-primary']
-            ])
+//            ->add('submit', SubmitType::class, [
+//                'label' => 'Envoyer la réponse',
+//                'attr' => ['class' => 'btn btn-primary']
+//            ])
         ;
     }
 

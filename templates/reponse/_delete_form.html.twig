@@ -1,4 +1,16 @@
-<form method="post" action="{{ path('app_reponse_delete', {'id': reponse.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reponse.id) }}">
-    <button class="btn">Delete</button>
-</form>
+{% extends 'base.html.twig' %}
+
+{% block title %}supprimer la réponse{% endblock %}
+
+{% block body %}
+
+
+
+
+{#<form method="post" action="{{ path('app_reponse_delete', {'id': reponse.id}) }}" style="display:inline;">#}
+{#    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reponse.id) }}">#}
+{#    <button class="btn btn-danger btn-sm" type="submit">#}
+{#        <i class="bi bi-trash"></i> Supprimer#}
+{#    </button>#}
+{#</form>#}
+{% endblock %}

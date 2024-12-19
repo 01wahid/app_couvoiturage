@@ -54,34 +54,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out-alt');
     }
 
-    // Fonction pour récupérer les statistiques des réclamations
-    private function getStatistics(): array
-    {
-        $totalReclamations = $this->reclamationRepository->count([]);
-        $urgentCount = $this->reclamationRepository->count(['priorite' => 'Urgent']);
-        $moyenCount = $this->reclamationRepository->count(['priorite' => 'Moyen']);
-        $basCount = $this->reclamationRepository->count(['priorite' => 'Bas']);
 
-        $problèmesPaiementCount = $this->reclamationRepository->count(['categorie' => 'Problèmes de paiement']);
-        $conduiteInappropriéeCount = $this->reclamationRepository->count(['categorie' => 'Conduite inappropriée']);
-        $passagerNonPonctuelCount = $this->reclamationRepository->count(['categorie' => 'Passager non ponctuel']);
-        $autresCount = $this->reclamationRepository->count(['categorie' => 'Autres']);
-
-        return [
-            'totalReclamations' => $totalReclamations,
-            'priorities' => [
-                'urgent' => $this->calculatePercentage($urgentCount, $totalReclamations),
-                'moyen' => $this->calculatePercentage($moyenCount, $totalReclamations),
-                'bas' => $this->calculatePercentage($basCount, $totalReclamations),
-            ],
-            'categories' => [
-                'paiement' => $this->calculatePercentage($problèmesPaiementCount, $totalReclamations),
-                'conduite' => $this->calculatePercentage($conduiteInappropriéeCount, $totalReclamations),
-                'ponctualité' => $this->calculatePercentage($passagerNonPonctuelCount, $totalReclamations),
-                'autres' => $this->calculatePercentage($autresCount, $totalReclamations),
-            ],
-        ];
-    }
 
     private function calculatePercentage(int $count, int $total): float
     {
@@ -107,4 +80,55 @@ class DashboardController extends AbstractDashboardController
 
 
 
+        #[Route('/dashboard', name:'dash')]
+        public function Dashboard(): Response
+        {
+            return $this->render('/admin/main.html.twig');
+        }
+
+    #[Route('/dashboardReclamation', name:'dash_reclamation')]
+    public function DashboardReclamation(ReclamationRepository $reclamationRepository): Response
+    {
+        $reclamations = $reclamationRepository->findAll();
+        return $this->render('admin/reclamationDash.html.twig', [
+            'reclamations' => $reclamations,
+        ]);    }
+
+    #[Route('/dashboardReponse', name:'dash_reponse')]
+    public function DashboardReponse(ReclamationRepository $reponseRepository): Response
+    {
+        $reponses = $reponseRepository->findAll();
+        return $this->render('admin/base.html.twig', [
+            'reponses' => $reponses,
+        ]);
+    }
+
+    // Fonction pour récupérer les statistiques des réclamations
+    private function getStatistics(): array
+    {
+        $totalReclamations = $this->reclamationRepository->count([]);
+        $urgentCount = $this->reclamationRepository->count(['priorite' => 'Urgent']);
+        $moyenCount = $this->reclamationRepository->count(['priorite' => 'Moyen']);
+        $basCount = $this->reclamationRepository->count(['priorite' => 'Bas']);
+
+        $problèmesPaiementCount = $this->reclamationRepository->count(['categorie' => 'Problèmes de paiement']);
+        $conduiteInappropriéeCount = $this->reclamationRepository->count(['categorie' => 'Conduite inappropriée']);
+        $passagerNonPonctuelCount = $this->reclamationRepository->count(['categorie' => 'Passager non ponctuel']);
+        $autresCount = $this->reclamationRepository->count(['categorie' => 'Autres']);
+
+        return [
+            'totalReclamations' => $totalReclamations,
+            'priorities' => [
+                'urgent' => $this->calculatePercentage($urgentCount, $totalReclamations),
+                'moyen' => $this->calculatePercentage($moyenCount, $totalReclamations),
+                'bas' => $this->calculatePercentage($basCount, $totalReclamations),
+            ],
+            'categories' => [
+                'paiement' => $this->calculatePercentage($problèmesPaiementCount, $totalReclamations),
+                'conduite' => $this->calculatePercentage($conduiteInappropriéeCount, $totalReclamations),
+                'ponctualite' => $this->calculatePercentage($passagerNonPonctuelCount, $totalReclamations),
+                'autres' => $this->calculatePercentage($autresCount, $totalReclamations),
+            ],
+        ];
+    }
 }

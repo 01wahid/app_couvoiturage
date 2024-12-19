@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservations{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Réservations sur mes trajets</h1>
+
+        {% if reservations is not empty %}
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Passager</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.nomPassager ~ ' ' ~ reservation.user.prenom }}</td>
+                        <td>
+                            <div class="d-flex">
+                                <!-- Accepter la réservation -->
+                                <form action="{{ path('accept_reservation', {id: reservation.idReservation}) }}" method="POST" class="me-2">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('accept_reservation' ~ reservation.idReservation) }}">
+                                    <button type="submit" class="btn btn-success"
+                                            {% if reservation.getStatutValue() != 'enAttente' %}disabled{% endif %}>
+                                        Accepter
+                                    </button>
+                                </form>
+
+                                <!-- Refuser la réservation -->
+                                <form action="{{ path('refuse_reservation', {id: reservation.idReservation}) }}" method="POST">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('refuse_reservation' ~ reservation.idReservation) }}">
+                                    <button type="submit" class="btn btn-danger"
+                                            {% if reservation.getStatutValue() != 'enAttente' %}disabled{% endif %}>
+                                        Refuser
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                Aucune réservation trouvée.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

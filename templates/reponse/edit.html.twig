@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Reponse{% endblock %}
+{% block title %}Modifier la réponse{% endblock %}
 
 {% block body %}
-    <h1>Edit Reponse</h1>
+    <div class="container mt-4 h-75">
+        <h1>Modifier la réponse</h1>
 
-    {{ include('reponse/_form.html.twig', {'button_label': 'Update'}) }}
+        {# Inclure le formulaire pour modifier la réponse #}
+        {{ include('reponse/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('app_reponse_index') }}">back to list</a>
+        {# Lien pour revenir à la liste des réponses #}
+        <a href="{{ path('app_reponse_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
 
-    {{ include('reponse/_delete_form.html.twig') }}
+        {# Inclure le formulaire pour supprimer la réponse #}
+        {{ include('reponse/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Réclamations{% endblock %}
+
+{% block body %}
+    <div class="container mt-5 h-100">
+        <h1 class="mb-4 text-center">Liste des objets</h1>
+
+        <!-- Formulaire de filtre (commenté pour le moment) -->
+        {# <div class="card mb-4"> #}
+        {#     <div class="card-body"> #}
+        {#         <h5 class="card-title">Filtrer les objets perdus</h5> #}
+        {#         {{ form_start(form, {'attr': {'class': 'row g-3'}}) }} #}
+        {#         <div class="col-md-6"> #}
+        {#             {{ form_row(form.priorite, {'attr': {'class': 'form-select'}}) }} #}
+        {#         </div> #}
+        {#         <div class="col-md-6"> #}
+        {#             {{ form_row(form.categorie, {'attr': {'class': 'form-select'}}) }} #}
+        {#         </div> #}
+        {#         <div class="col-12"> #}
+        {#             <button type="submit" class="btn btn-primary">Filtrer</button> #}
+        {#         </div> #}
+        {#         {{ form_end(form) }} #}
+        {#     </div> #}
+        {# </div> #}
+
+        <!-- Tableau des objets -->
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Objet</th>
+                <th>Description</th>
+                <th>IsFound</th>
+                <th>DatePerte</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for objet_perdu in objet_perdus %}
+                <tr>
+                    <td>{{ objet_perdu.id }}</td>
+                    <td>{{ objet_perdu.objet }}</td>
+                    <td>{{ objet_perdu.description }}</td>
+                    <td>{{ objet_perdu.isFound ? 'Yes' : 'No' }}</td>
+                    <td>{{ objet_perdu.datePerte ? objet_perdu.datePerte|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="{{ path('app_reclamation_show', {'id': objet_perdu.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                            <a href="{{ path('app_objet_perdu_edit', {'id': objet_perdu.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form action="{{ path('app_objet_perdu_delete', {'id': objet_perdu.id}) }}" method="post" style="display:inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ objet_perdu.id) }}">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réclamation ?');">Supprimer</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">Aucun objet trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Bouton d'ajout -->
+        <div class="d-grid gap-2">
+            <a href="{{ path('app_objet_perdu_new') }}" class="btn btn-primary btn-lg">Ajouter une Réclamation</a>
+        </div>
+    </div>
+{% endblock %}

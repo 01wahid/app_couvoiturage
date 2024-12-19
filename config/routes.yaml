@@ -5,11 +5,15 @@ controllers:
     type: attribute
 admin_dashboard:
     path: /admin
-    controller: App\Controller\Admin\DashboardController::index
+    controller: App\Controller\Admin\DashboardController::Dashboard
 
 app_home_page:
     path: /
     controller: App\Controller\HomeController::index
+
+objet_perdu_index:
+    path: /objetPerdu
+    controller: App\Controller\ObjetPerduController::index
 
 # config/routes.yaml
 admin:
